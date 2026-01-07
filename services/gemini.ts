@@ -2,17 +2,20 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { AIAnalysis } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const generateArticleContent = async (title: string, category: string): Promise<string> => {
+  // Always create a new instance right before making an API call to ensure it uses the most up-to-date API key.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
     contents: `Write a high-quality, professional article summary or introduction (about 250 words) for an article titled "${title}" in the category of "${category}". The content should be engaging and worth paying for.`
   });
+  // Use the .text property to access the generated content.
   return response.text || "Failed to generate content.";
 };
 
 export const analyzeArticleMarket = async (title: string, content: string, price: number): Promise<AIAnalysis> => {
+  // Always create a new instance right before making an API call to ensure it uses the most up-to-date API key.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
     contents: `Analyze this proposed article for a marketplace:
@@ -40,6 +43,7 @@ export const analyzeArticleMarket = async (title: string, content: string, price
   });
 
   try {
+    // Use the .text property to access the generated content.
     return JSON.parse(response.text || '{}') as AIAnalysis;
   } catch (e) {
     return {
