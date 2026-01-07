@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from './Button';
 import { CATEGORIES, DEFAULT_IMAGE } from '../constants';
 import { generateArticleContent, analyzeArticleMarket } from '../services/gemini';
-import { Article, AIAnalysis } from '../types';
+import { Article, Category, AIAnalysis } from '../types';
 
 interface ArticleFormProps {
   onSave: (article: Article) => void;
@@ -13,7 +13,7 @@ interface ArticleFormProps {
 export const ArticleForm: React.FC<ArticleFormProps> = ({ onSave, onCancel }) => {
   const [formData, setFormData] = useState({
     title: '',
-    category: CATEGORIES[0],
+    category: CATEGORIES[0] as Category,
     price: 19.99,
     content: '',
     author: ''
@@ -94,10 +94,11 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ onSave, onCancel }) =>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Category</label>
+            {/* Fix: cast e.target.value to Category to ensure type compatibility with the state */}
             <select 
               className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
               value={formData.category}
-              onChange={e => setFormData(prev => ({ ...prev, category: e.target.value }))}
+              onChange={e => setFormData(prev => ({ ...prev, category: e.target.value as Category }))}
             >
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>

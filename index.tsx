@@ -177,7 +177,8 @@ const ArticleForm = ({ onSave, onCancel }: { onSave: any, onCancel: any }) => {
           <input placeholder="Author" className="col-span-2 md:col-span-1 p-2 border rounded" value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} />
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <select className="p-2 border rounded" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})}>
+          {/* Fix: cast e.target.value to Category to satisfy type check */}
+          <select className="p-2 border rounded" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value as Category})}>
             {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
           <input type="number" step="0.01" className="p-2 border rounded" value={formData.price} onChange={e => setFormData({...formData, price: parseFloat(e.target.value)})} />
