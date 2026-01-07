@@ -1,7 +1,5 @@
 {
   "name": "Articly Marketplace",
-  "description": "A premium platform to publish, manage, and discover monetized articles. Features AI-powered content generation and market value analysis.",
-  "requestFramePermissions": [
-    "camera"
-  ]
+  "description": "Plataforma premium para monetizar artículos. Los datos se guardan localmente para máxima privacidad en GitHub Pages.",
+  "requestFramePermissions": []
 }

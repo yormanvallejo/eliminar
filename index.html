@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articly - Marketplace de Contenido</title>
+    <title>Articly - Marketplace Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .article-card:hover { transform: translateY(-4px); }
     </style>
     <script type="importmap">
 {
@@ -28,23 +29,23 @@
 }
 </script>
 </head>
-<body class="bg-slate-50 text-slate-900">
-    <!-- Contenedor para aviso de error de protocolo -->
-    <div id="protocol-warning" class="hidden fixed inset-0 z-[200] bg-white flex items-center justify-center p-6 text-center">
-        <div class="max-w-md">
-            <div class="text-red-500 mb-4">
-                <svg className="mx-auto w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+<body>
+    <div id="root"></div>
+
+    <!-- Aviso si se abre localmente sin servidor -->
+    <div id="file-protocol-modal" class="hidden fixed inset-0 z-[500] bg-white flex items-center justify-center p-8">
+        <div class="max-w-md text-center">
+            <div class="bg-amber-100 text-amber-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
-            <h1 class="text-2xl font-bold mb-2">Requiere Servidor Local</h1>
-            <p class="text-slate-600 mb-6">Para que la IA y los módulos funcionen, no puedes abrir el archivo directamente. Por favor, usa una extensión como <b>Live Server</b> o sube los archivos a un hosting (GitHub Pages, Vercel, etc).</p>
+            <h2 class="text-2xl font-black mb-2">¡Atención!</h2>
+            <p class="text-slate-600 mb-6">Para que la aplicación funcione (IA y Base de Datos), necesitas abrirla a través de un servidor (como Live Server en VS Code) o subirla a <b>GitHub Pages</b>. No funcionará haciendo doble clic al archivo .html directamente.</p>
         </div>
     </div>
 
-    <div id="root"></div>
-
     <script type="module">
         if (window.location.protocol === 'file:') {
-            document.getElementById('protocol-warning').classList.remove('hidden');
+            document.getElementById('file-protocol-modal').classList.remove('hidden');
         }
     </script>
     <script type="module" src="index.js"></script>
